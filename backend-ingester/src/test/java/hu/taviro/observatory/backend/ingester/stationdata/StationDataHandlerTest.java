@@ -9,21 +9,21 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.converter.MessageConversionException;
 import org.springframework.messaging.support.MessageBuilder;
 
-import hu.taviro.observatory.backend.core.stationdata.StationDataService;
+import hu.taviro.observatory.backend.core.station.StationService;
 
 import static org.mockito.Mockito.mock;
 
 public class StationDataHandlerTest {
 
     private StationDataHandler stationDataHandler;
-    private StationDataService stationDataServiceMock;
+    private StationService stationServiceMock;
     private StationDataMapper stationDataMapperMock;
 
     @Before
     public void init() {
-        stationDataServiceMock = mock(StationDataService.class);
+        stationServiceMock = mock(StationService.class);
         stationDataMapperMock = mock(StationDataMapper.class);
-        stationDataHandler = new StationDataHandler(stationDataMapperMock, stationDataServiceMock);
+        stationDataHandler = new StationDataHandler(stationDataMapperMock, stationServiceMock);
     }
 
     @Test(expected = MessageConversionException.class)

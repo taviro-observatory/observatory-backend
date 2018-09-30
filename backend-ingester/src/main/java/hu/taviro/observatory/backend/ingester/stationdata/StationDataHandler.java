@@ -4,13 +4,14 @@ import java.util.Objects;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.converter.MessageConversionException;
 import org.springframework.stereotype.Component;
 
-import hu.taviro.observatory.backend.core.stationdata.StationDataService;
-import hu.taviro.observatory.backend.core.stationdata.messages.StationDataAdditionMessage;
+import hu.taviro.observatory.backend.core.station.StationService;
+import hu.taviro.observatory.backend.core.station.messages.StationDataAdditionMessage;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -19,14 +20,14 @@ public class StationDataHandler implements MessageHandler {
     static final String HEADER_TOPIC = "mqtt_receivedTopic";
 
     private final StationDataMapper stationDataMapper;
-    private final StationDataService stationDataService;
+    private final StationService stationService;
 
     @Override
-    public void handleMessage(Message<?> message) {
+    public void handleMessage(@NonNull Message<?> message) {
         validateMessage(message);
         String stationId = extractStationId(message);
         StationDataAdditionMessage additionMessage = constructAdditionMessage(message, stationId);
-        stationDataService.createStationData(additionMessage);
+        stationService.createStationData(additionMessage);
     }
 
     private void validateMessage(Message<?> message) {

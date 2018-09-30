@@ -1,4 +1,4 @@
-package hu.taviro.observatory.backend.core.stationdata.messages;
+package hu.taviro.observatory.backend.core.station.messages;
 
 import lombok.Data;
 

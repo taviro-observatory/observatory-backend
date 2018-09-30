@@ -4,6 +4,14 @@ spring:
   output:
     ansi:
       enabled: always
+  data:
+    mongodb:
+      database: observatory
+      host: localhost
+      port: 27017
+      username: observatory
+      password: observatory
+
 
 server:
   port: 8088
